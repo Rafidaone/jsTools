@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>base 64 tool</title>
+</head>
+<body>
+    <div>
+        
+    <button id="enco">decode from base 64</button>
+    <button id="de">encode to base 64</button>
+    <h3 id="out"></h3>
+    <textarea id="inp">type here</textarea>
+</div>
+    
+    <script>
+
+
+
+
+//covert text to base 64
+ de = document.querySelector('#de');
+        de.addEventListener('click', function(event) {
+
+        var text64 = document.getElementById('inp').value;
+
+        document.getElementById("out").innerHTML =   'text to base 64: ' + btoa(text64);
+        console.log(btoa(text64));
+        
+        
+
+
+        });
+//covert base 64 to text 
+enco = document.querySelector('#enco');
+        enco.addEventListener('click', function(event) {
+
+        var text64 = document.getElementById('inp').value;
+        let str = inp;
+let enc = btoa(str);
+console.log(enc); // Outputs: "SGVsbG8gUGVvcGxl"
+let dec = atob(enc);
+console.log(dec); // Outputs: "Hello People"
+
+
+        document.getElementById("out").innerHTML =   'base 64 to text: ' + '\n' + atob(text64);
+        console.log(atob('hello'));
+        
+        
+
+
+        });
+
+    </script>
+
+
+
+<style>
+    body{
+        background-color: #42454a;
+           color: lightblue 
+           
+        }
+        body h2 {
+    
+            color: #ed0909
+        }
+        body h3 {
+    
+    color : whitesmoke
+    
+        }
+    
+        body h1 {
+    color: #c4ebf5
+    
+    
+        }
+    
+        textarea {
+          background-color: #4d758f32;
+          color: rgb(255, 255, 255);
+          box-shadow: 0 30px 60px 0 rgba(0,0,0,0.24),0 100px 100px 0 rgba(0,0,0,0.19);
+          font-size: 25px;
+        height: 1in;
+         width: 95%; 
+         transform: translatex(1cm);
+         transform: translatey(1cm);
+        
+        }
+        button:active {
+            background-color: #3f35d3;
+            box-shadow: 0 30px 60px 0 rgba(0,0,0,0.24),0 70px 50px 0 rgba(0,0,0,0.19);
+            transform: translatey(8px);
+        }
+        button:hover {
+            padding:  15px;
+            background-color: #3770C8;
+            box-shadow: 0 30px 60px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        button {
+            align-items: center;
+            display: inline-block;
+            padding: 5 9px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: rgb(255, 255, 255);
+            background-color: #42509e;
+            border: none;
+            border-radius: 15px;
+         
+            
+              
+          
+           
+          }
+          input {
+            align-items: center;
+            display: inline-block;
+            padding: 3 5px;
+            font-size: 17px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: rgb(255, 255, 255);
+            background-color: #42509e;
+            border: none;
+            border-radius: 15px;
+         
+    
+          }
+    
+
+          body {
+          background: linear-gradient(90deg, #42454a 0%,#60697a 30%,#575280 67%, #4c5158 100%);
+            background-size: 1000%;
+            animation: background 31s linear alternate infinite;
+          }
+          
+          @keyframes background {
+            from {
+              background-position: 0 0;
+            }
+            to {
+              background-position: 100% 0;
+            }
+          }
+
+        button {
+         float: right;
+    
+       }
+       h1 {
+         float: left;
+         transform: translatex(1cm);
+         
+       }
+    input{
+      float: right;
+    }
+       </style>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>anty g</title>
+</head>
+<body>
+
+    <textarea  id="userIn" cols="30" rows="10"></textarea>
+    <button id="seeRes" class="btu" onclick="seeRes()">see response</button>
+    <button id="stopBtn" class="btu" onclick="stop()">stop</button>
+  <button id="startBtn" class="btu" onclick="start()">start!</button>
+  <div id="res"></div>
+
+
+  <script>
+    let intervalId;
+    let off = false;
+// starts main script
+    function start() {
+  let i = 0;
+  intervalId = setInterval(function() {
+    fetch(document.getElementById("userIn").value, { mode: "no-cors" })
+      .then(response => {
+        console.log("Response received:", response);
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+
+    if (off) {
+      clearInterval(intervalId);
+    }
+    i++;
+  }, 10);
+}
+// see the respons of the server
+function seeRes(){
+    fetch(document.getElementById("userIn").value, { mode: "no-cors" })
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("res").innerHTML = data;
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+    });
+
+
+}
+    //stop btn
+    function stop() {
+        
+      off = true;
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+

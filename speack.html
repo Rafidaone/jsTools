@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>text to speech</title>
+<style>
+
+
+body{
+background-color: rgb(79, 94, 181);
+overflow-x: hidden;
+
+}
+
+h1{
+font-size: 1.5cm;
+color: white;
+text-align: center;
+
+}
+
+textarea{
+    display: block;
+  margin: 0 auto;
+
+    color: white;
+font-size: 1cm;
+    background-color: rgba(56, 70, 150, 0.878);
+}
+
+button{
+    display: block;
+  margin: 0 auto;
+
+    color: white;
+font-size: 1cm;
+    background-color: rgba(80, 100, 213, 0.878);
+}
+button:hover{
+    display: block;
+  margin: 0 auto;
+
+    color: white;
+font-size: 1.4cm;
+    background-color: rgba(40, 50, 106, 0.878);
+}
+button:click{
+    display: block;
+  margin: 0 auto;
+
+    color: rgb(205, 54, 54);
+font-size: 1.4cm;
+    background-color: rgba(40, 50, 106, 0.878);
+}
+
+#tooltip{
+    position: absolute;
+
+color: white;
+
+}
+    </style>
+</head>
+<body>
+<h1>text to speach</h1>
+<div id="tooltip" style="display:none">enter type text to be spoken</div>
+<textarea onmouseover="showText()" onmouseout="hideText()" id="user" cols="30" rows="5"></textarea>
+<button id="enter" onclick="talk()"> say it!</button>
+<script>
+//defalt settings
+//speed
+var ss = 1;
+//volum
+var sp = 3;
+
+
+        //tooltip shit to hide & unhide
+function showText() {
+  var tooltip = document.getElementById("tooltip");
+  tooltip.style.display = "block";
+}
+
+function hideText() {
+  var tooltip = document.getElementById("tooltip");
+  tooltip.style.display = "none";
+}
+
+// make mosue fallow
+var followDiv = document.getElementById("tooltip");
+  
+  document.addEventListener("mousemove", function(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    followDiv.style.left = x + "px";
+    followDiv.style.top = y + "px";
+  });
+
+
+
+
+//the speack function
+
+  function talk() {
+  const msg = new SpeechSynthesisUtterance();
+  const voices = window.speechSynthesis.getVoices();
+  msg.voice = voices.find(voice => voice.name === 'Google UK English Male');
+  msg.text = document.getElementById('user').value;
+  msg.rate = parseInt(ss);
+  msg.pitch = parseFloat(sp);
+  msg.lang = 'en-US';
+  msg.volume = 1;
+  window.speechSynthesis.speak(msg);
+}
+
+
+
+    </script>
+</body>
+</html>

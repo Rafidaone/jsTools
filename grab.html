@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pin theaf sim</title>
+    <style>
+
+@font-face {
+  font-family: clock;
+  src: url(clock.ttf);
+}
+
+@font-face {
+  font-family: norm1;
+  src: url(norm1.ttf);
+}
+body{
+
+  background-color: rgb(80, 79, 78);
+}
+
+#title{
+  color: white;
+font-size: 1.5cm;
+text-align: center;
+font-family: norm1;
+
+}
+
+#num{
+
+  border: 20px solid rgb(48, 46, 43);
+  box-sizing: border-box;
+  padding: 10px;
+  width: calc(60%);
+  margin: 0 auto;
+
+
+
+
+
+
+  
+  font-weight: bold;
+  font-size: 3cm;
+text-align: center;
+font-family: clock;
+background-color: green;
+color: rgb(0, 34, 0)
+
+}
+
+#in{
+  color: rgb(255, 255, 255);
+  font-family: clock;
+  align-self: center;
+  font-weight: bold;
+  font-size: .7cm;
+  margin: 0 auto;
+background-color: #777272;
+}
+
+#info{
+  color: white;
+  text-align: center;
+  font-size: .7cm;
+  cursor: wait;
+}
+
+.btu{
+  color: white;
+font-size: .5cm;
+font-family: norm1;
+text-align: center;
+}
+.btu:hover{
+  color: rgb(255, 145, 0);
+  cursor: pointer;
+font-size: .5cm;
+font-family: norm1;
+text-align: center;
+}
+
+
+
+#settings-window {
+  font-family: norm1;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: #3a3849;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px #aaa;
+  color: white
+}
+.sbtu{
+font-weight: 700;
+background-color: aqua;
+
+
+}
+
+#btuc:hover{
+  font-weight: 700;
+background-color: rgb(255, 0, 0);
+color: white;
+font-size: 110%;
+}
+#btus:hover{
+  font-weight: 700;
+background-color: rgb(38, 255, 0);
+color: rgb(32, 25, 25);
+font-size: 110%;
+}
+
+.number-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number-container {
+   /* Add this line */
+  padding: 20px; /* Add padding for some space around the number */
+}
+
+
+
+    </style>
+</head>
+<body>
+    
+
+    <p id="title">PIN yoyinker sim</p>
+    <p id="info">This is a traing simulator for getting people's school id. press the start button to start training, change settings to fit your needs</p>
+    
+    <div id="ass" vclass="number-display">
+      <div id="ass" class="number-container">
+        <p id="num"></p>
+      </div>
+    </div>
+    
+    
+
+<!-- settings window -->
+<div id="settings-window">
+  <h2 id="ss">settings menu</h2>
+  <label for="speed">the speed of typing (in mila sec):</label>
+  <input type="number" id="speed" min="10" max="1000" value="200">
+  <br>
+  <label for="wait-time">Wait Time (in sec):</label>
+  <input type="number" id="wait-time" min="1"  value="5">
+  <br>
+  <label for="pin-length">PIN Length:</label>
+  <input type="number" id="pin-length" min="1" value="5">
+  <br>
+  <button id="btuc" class="sbtu" onclick="closes()">Close</button>
+  <button id="btus" class="sbtu" onclick="saveSettings()">Save</button>
+ 
+</div>
+
+
+
+
+
+
+   <!-- buttons for main ui-->
+    <h2 class="btu" id="start" onclick="start()">start/retry</h2>
+<h2  class="btu" id="os" onclick="openSettings()">open settings menu</h2>
+
+<input type="number" placeholder="num goes here" id="in"> 
+
+
+
+
+    <script>
+
+
+//  ----------------------- setting vales -------------------------
+//speed of numbers being typed
+var ss = 200
+//time of wating
+var sw = 5
+//pin length
+var sl = 5
+//score system
+var score = parseInt(localStorage.getItem("score"));
+if (score === null || isNaN(parseInt(score))) {
+  score = 0;
+  
+}
+
+
+
+
+// Function to open the settings window
+
+function closes(){
+
+  document.getElementById("settings-window").style.display = "none";
+}
+
+
+
+function openSettings() {
+  document.getElementById("settings-window").style.display = "block";
+}
+
+// Function to save the settings
+function saveSettings() {
+  // Get the values from the inputs
+  ss = document.getElementById("speed").value;
+  sw = document.getElementById("wait-time").value;
+  sl = document.getElementById("pin-length").value;
+
+  // Hide the settings window
+  document.getElementById("settings-window").style.display = "none";
+}
+
+
+
+document.getElementById("ass").style.display = "none";
+
+//document.getElementById("num").style.display = "none";
+document.getElementById("in").style.display = "none";
+ //----------------------number genaration start -------------------
+
+
+
+ function start(){
+  document.getElementById("ass").style.display = "block";
+  document.getElementById("os").style.display = "none";
+  document.getElementById("info").style.display = "none";
+  document.getElementById("in").style.display = "none";
+
+  // number generation start ---------------
+  var digits = [];
+  for (var i = 0; i < sl; i++) {
+    digits.push(Math.floor(Math.random() * 10));
+  }
+  var num = parseInt(digits.join(""));
+  var screen = digits.join(" ");
+  document.getElementById("num").innerHTML = screen;
+  // number generation end ---------------
+
+  // clearing/waiting start ------------
+  setTimeout(function() {
+    document.getElementById("ass").style.display = "none";
+    document.getElementById("info").style.display = "block";
+    document.getElementById("num").innerHTML = "";
+    document.getElementById("info").innerHTML = "now wait " + sw + " sec's";
+   
+    if (document.getElementById('in').value ){
+      // do something if input is not empty
+    }
+  }, ss * sl + 1 );
+  // clearing/waiting ends ------------------
+
+  // checking if correct and saving to localStorage
+  setTimeout(function() {
+    document.getElementById("info").innerHTML = "enter num you just remembered (i hope)";
+    document.getElementById("in").innerHTML = "";
+    document.getElementById("in").style.display = "block";
+    document.getElementById("in").focus();
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        var input = document.getElementById("in").value;
+        var inputInt = parseInt(input.replace(/\D/g, ""));
+        if (inputInt == num) {
+          
+         score = score + 1;
+         localStorage.setItem("score", score);
+
+          
+          document.getElementById("info").innerHTML = "FUCK you did right, for " + score + " time.";
+          setTimeout(start, 2000);
+
+        } else {
+          document.getElementById("info").innerHTML = "you dumb ass, that anit right.";
+          setTimeout(start, 2000);
+        }
+      }
+    });
+  }, sw * 1000);
+
+
+}
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js Console emu</title>
+    <style>    
+
+
+@font-face {
+  font-family: clock;
+  src: url(clock.ttf);
+}
+        body{
+            background-color: black;
+            color: rgb(94, 255, 0);
+            font-size: medium;
+
+        }
+
+        input {
+            border-color: (18, 18, 18);;
+            background-color: rgb(18, 18, 18);
+            color: rgb(236, 255, 91);
+            position: fixed;
+            bottom: 0;
+            width: 94%;
+            left: 0;
+            display: inline-block;
+        }
+
+        button {
+            border-color: (18, 18, 18);;
+            background-color: rgb(18, 18, 18);
+            color: rgb(255, 170, 24);
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 5%;
+            font-family: clock;
+font-size: larger;
+        }
+
+        .error {
+            color: red;
+            font-family: clock;
+
+        }
+    </style>
+</head>
+<body>
+    <p id="output"></p>
+    <button type="button" onclick="executeCommand()">Enter</button>
+    <input type="text" id="input">
+    <script>
+        window.onload = function() {
+            console.log("Welcome to the js console emulator, by RafiDEV (and chat gpt).");
+    console.log("");
+    console.log("   This console will execute js code that you enter.");
+    console.log("");
+    console.log('For a list of commands that don`t exist in vanilla js you type "list".');
+
+    console.log("");
+            input.focus();
+        };
+
+        document.addEventListener('keypress', function(event) {
+            input.focus();
+        });
+
+        document.addEventListener('click', function(event) {
+            input.focus();
+        });
+
+        const consoleOutput = document.querySelector("#output");
+        // custom commands =-----------------------------------------
+        
+        const customCommands = {
+            clear: function() {
+        consoleOutput.innerHTML = "";
+    },
+    list: function() {
+       console.log("List of all commands:");
+       console.log("");
+       console.log("list: Show's a list off all commands.");
+       console.log("clear: Clears the screen.");
+       console.log("listvar: Shows all the local variables and there values.");
+       console.log("exit: Exit's the tab.");
+
+
+        },
+    
+
+    clear: function() {
+        consoleOutput.innerHTML = "";
+    },
+    exit: function() {
+        console.error("alah akbar!");
+        openedWindow = window.close;
+    },
+    listvar: function() {
+        for (var key in window) {
+            if (window.hasOwnProperty(key)) {
+                console.log(key + ": " + window[key]);
+            }
+        }
+    }
+};
+
+customCommands.list.description = "Lists all custom commands or displays info about a specific command.";
+customCommands.list.usage = "Usage: list [command] (optional)";
+        // custom commands end --------
+
+        console.log = function(message) {
+            consoleOutput.innerHTML += message + "<br>";
+        };
+
+        console.error = function(message) {
+            consoleOutput.innerHTML += "<span class='error'>" + message + "</span><br>";
+        };
+
+        function executeCommand() {
+            event.preventDefault(); // prevent form submission
+            const input = document.querySelector("#input").value;
+            console.log("> " + input + ": ");
+            try {
+                if (input in customCommands) {
+                    customCommands[input]();
+                } else {
+                    eval(input);
+                }
+            } catch (error) {
+                console.error("Error: " + error.message);
+            }
+            document.querySelector("#input").value = "";
+        }
+
+        const input = document.querySelector('input');
+
+        input.addEventListener('keydown', (event) => {
+            if (event.keyCode === 13) {
+                executeCommand();
+            }
+        });
+    </script>
+</body>
+</html>

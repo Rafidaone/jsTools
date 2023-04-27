@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>base 64 file converter</title>
+
+  <style>
+    #inBox {
+      align-items: center;
+      width: 60vw;
+      height: 30vh;
+      margin: 0 auto;
+      border: 2px solid black;
+    }
+
+    #outBox {
+      align-items: center;
+      width: 60vw;
+      height: 15vh;
+      margin: 0 auto;
+      border: 2px solid black;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    textarea {
+      width: 50vw;
+      height: 20vh;
+      margin: auto;
+    }
+
+    input {
+      text-align: center;
+    }
+
+    input.hov {
+      width: 60vw;
+      height: 45vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="inBox" ondragenter="show()" ondragleave="dontshow()">
+    <input type="file" id="Fin">
+    <textarea id="in" placeholder="paste base64 here"></textarea>
+  </div>
+
+  <h2>Output:</h2>
+  <p id="out"></p>
+  <button id="download-btn" >Download file</button>
+
+  <script>
+    // drag and drop file
+    function show() {
+      document.getElementById("Fin").classList.add("hov");
+      console.log("file is over this div");
+    }
+
+    function dontshow() {
+      document.getElementById("Fin").classList.remove("hov");
+      console.log("file not over the div");
+    }
+
+    // conversion
+    // Select the file input element
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Listen for changes to the file input
+    fileInput.addEventListener("change", () => {
+      // Get the selected file
+      const file = fileInput.files[0];
+
+      // Create a new file reader
+      const reader = new FileReader();
+
+      // When the file reader loads, convert the file to a data URL
+      reader.addEventListener("load", () => {
+        // Get the data URL
+        const dataURL = reader.result;
+
+        // Convert the data URL to a base64 encoded string
+        const base64String = dataURL.split(",")[1];
+
+        // Do something with the base64 string
+        console.log(base64String);
+        document.getElementById("out").innerHTML = base64String;
+
+        // Convert the base64 string back to binary data
+        const binaryString = window.atob(base64String);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+
+        // Create a Blob object from the binary data
+        const blob = new Blob([bytes.buffer]);
+
+        // Set the download button link to the blob URL
+        const downloadBtn = document.getElementById("download-btn");
+        downloadBtn.style.display = "block";
+        downloadBtn.setAttribute("href", URL.createObjectURL(blob));
+        downloadBtn.setAttribute("download", file.name);
+      });
+
+      // Read the file as a data URL
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>

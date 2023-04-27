@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js tools</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <style>
+@font-face {
+  font-family: const;
+  src: url(cunst.otf);
+}
+
+
+
+.fun{ cursor: progress;}
+
+
+#title{
+font-family: const;
+font-size: 2cm;
+text-align: center;
+color: rgba(255, 255, 0, 0.773);
+text-shadow: 2px 2px 9px rgba(255, 149, 0, 0.773), -2px -2px 9px rgba(255, 174, 0, 0.773);
+}
+
+.btu:hover{
+  background-color:rgba(240, 248, 255, 0);
+  font-family: const;
+    color: red;
+font-size: 1cm;
+text-align: center;
+cursor: pointer;
+text-shadow: 2px 2px 9px rgba(255, 136, 0, 0.996), -2px -2px 9px rgba(255, 119, 0, 0.541);
+
+
+
+
+}
+
+body{
+background-size: 3.5in;
+background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("bg.jpg");
+  background-repeat: repeat;
+  image-rendering: optimizeSpeed;
+  
+}
+
+.btu{
+  background-color:rgba(240, 249, 255, 0);
+  font-family: const;
+color: red;
+
+font-size: 1cm;
+text-align: center;
+cursor: pointer;
+text-shadow: 2px 2px 9px rgba(255, 0, 0, 0.621), -2px -2px 9px rgba(255, 0, 0, 0.541);
+
+
+
+}
+.btu:active{
+    
+    cursor: pointer;
+    transform: translatey(8px);
+  }
+
+.tooltip{
+    
+background-color: rgba(0, 0, 0, 0.635);
+color: rgb(20, 67, 255);
+pointer-events: none;
+z-index: 9999;
+text-align: center;
+position: absolute;
+  z-index: 9999;
+  border-radius: 5px;
+  width: fit-content;
+  height: auto;
+  transform: translateX(-50%);
+  left: 50%;
+  opacity: 0;
+  font-size: 60%;
+  transition: opacity 0.3s ease-in-out, color 0.4s ease-in-out, font-size 0.3s ease-in-out;
+
+
+
+}
+.tooltip.show {
+  opacity: 1;
+  color: white;
+  font-size: 130%;
+}
+
+.tooltip.hide {
+  opacity: 0;
+  font-size: 60%;
+  color: rgb(20, 67, 255);
+}
+
+
+    </style>
+</head>
+<body>
+    <h1  id="title" class="fun">JS Tool's</h1>
+
+
+   <p onclick="window.location.href = 'notes.html'" onmouseover="showNP()" onmouseout="hideNP()" id="btu" class="btu">web NotePad</p>
+   <div class="tooltip" id="np" >It's a text editor that can open & save file's,<br> and you can test html pages with in the same browser!</div>
+
+   <p onclick="window.location.href = 'new.html'" onmouseover="showT()" onmouseout="hideT()" id="btu" class="btu">Tabz</p>
+   <div class="tooltip" id="tab">you like tabs?</div>
+   
+   <p onclick="window.location.href = 'screen-corder.html'" onmouseover="showSR()" onmouseout="hideSR()" id="btu" class="btu">Screen Recorder</p>
+   <div class="tooltip" id="sr">It records the screen,<br> and lets you download what you recorded.</div>
+
+
+   <p onclick="window.location.href = 'base64.html'" onmouseover="showB64()" onmouseout="hideB64()" id="btu" class="btu">Base 64 Converter</p>
+   <div class="tooltip" id="B64">It converts text to base64 <br> and vise versa.</div>
+
+<p onclick='window.open("mirror.html","", "width=1500, height=600")' onmouseover="showM()" onmouseout="hideM()" id="btu" class="btu">mirror</p>
+   <div class="tooltip" id="m">Its just a black window, that you will split screen.<br><br> Note: your monitor must be glossy for this to work</div>
+ 
+   <p onclick="window.location.href = 'grab.html'" onmouseover="showBSS()" onmouseout="hideBSS()" id="btu" class="btu">PIN Stealing Simulator</p>
+   <div class="tooltip" id="BSS">Its a training Simulator, for looking at someone <br> entering there pin and you remember it. There are also a few setting <br>you can change to optimize your performance </div>
+
+
+   <p onclick="window.location.href = 'speack.html'" onmouseover="showTTC()" onmouseout="hideTTC()" id="btu" class="btu">Text To Speech</p>
+   <div class="tooltip" id="TTC">It converts text to speech, using a built in js api</div>
+  
+   <p onclick="window.location.href = 'console.html'" onmouseover="showC()" onmouseout="hideC()" id="btu" class="btu">Js console</p>
+   <div class="tooltip" id="C">Its a js console emulator that works in your browser. <br> This is mostly for when schools block the inspect element on there chromebook's.</div>
+
+
+   <script>
+
+
+
+
+//button description start --------------
+
+//note pad
+function showNP() {
+  var tooltip = document.getElementById("np");
+tooltip.classList.add("show");
+
+}
+
+function hideNP() {
+  var tooltip = document.getElementById("np");
+  tooltip.classList.remove("show");
+
+}
+
+// tabs--------------------------
+function showT() {
+  var tooltip = document.getElementById("tab");
+  tooltip.classList.add("show");
+}
+
+function hideT() {
+  var tooltip = document.getElementById("tab");
+  tooltip.classList.remove("show");
+}
+
+// screen corder----------------------
+function showSR() {
+  var tooltip = document.getElementById("sr");
+  tooltip.classList.add("show");
+}
+
+function hideSR() {
+  var tooltip = document.getElementById("sr");
+  tooltip.classList.remove("show");
+}
+
+// base64----------------------------
+function showB64() {
+  var tooltip = document.getElementById("B64");
+  tooltip.classList.add("show");
+}
+
+function hideB64() {
+  var tooltip = document.getElementById("B64");
+  tooltip.classList.remove("show");
+}
+
+// mirror----------------------------
+function showM() {
+  var tooltip = document.getElementById("m");
+  tooltip.classList.add("show");
+}
+
+function hideM() {
+  var tooltip = document.getElementById("m");
+  tooltip.classList.remove("show");
+}
+
+// pin younker----------------------------
+function showBSS() {
+  var tooltip = document.getElementById("BSS");
+  tooltip.classList.add("show");
+}
+
+function hideBSS() {
+  var tooltip = document.getElementById("BSS");
+  tooltip.classList.remove("show");
+}
+
+// text 2 speach----------------------------
+function showTTC() {
+  var tooltip = document.getElementById("TTC");
+  tooltip.classList.add("show");
+}
+
+function hideTTC() {
+  var tooltip = document.getElementById("TTC");
+  tooltip.classList.remove("show");
+}
+// js terminal----------------------------
+function showC() {
+  var tooltip = document.getElementById("C");
+  tooltip.classList.add("show");
+}
+
+function hideC() {
+  var tooltip = document.getElementById("C");
+  tooltip.classList.remove("show");
+}
+
+
+//button dis end -----------------
+
+
+
+   </script>
+
+</body>
+</html>
